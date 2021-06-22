@@ -42,7 +42,7 @@ router.get("/",async (req, res) => {
         const entries = await WorkoutModel.findAll(); 
         res.status(200).json(entries);
     } catch (err) {
-        res.status(500).json({error: err });
+        res.status(500).json({error: err.message });
     }
 });
 
@@ -55,14 +55,14 @@ Get entries by User
 router.get("/mine", validateJWT, async (req, res) => {  
     const {id} = req.user; 
     try{
-        const userWorkouts = await JournalModel.findAll({
+        const userWorkouts = await WorkoutModel.findAll({
             where: {
                 owner_id: id
             }
         });
         res.status(200).json(userWorkouts);
     } catch (err) {
-        res.status(500).json({ error: err});
+        res.status(500).json({ error: err.message});
     }
 });
 
@@ -85,7 +85,7 @@ router.put("/update/:entryId", validateJWT, async (req, res) => {
         }
     };
 
-    const updatedJournal = {
+    const updatedWorkout = {
         description: description,
         definition: definition,
         result: result,
@@ -93,10 +93,10 @@ router.put("/update/:entryId", validateJWT, async (req, res) => {
     };
 
     try {
-        const update = await WorkoutModel.update(updatedWorkout. query);
-        res.status(200).json(update);
+        const update = await WorkoutModel.update(updatedWorkout, query);
+        res.status(200).json(updatedWorkout);
     } catch (err) {
-        res.status(500).json({ error: err});
+        res.status(500).json({ error: err.message});
     }
 });
 
