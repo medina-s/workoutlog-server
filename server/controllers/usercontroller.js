@@ -26,7 +26,7 @@ router.post("/register", async (req, res) => {
             message: "Failed to register user",
         });
     }
-}
+}})
 
 
 // User LOGIN
@@ -37,8 +37,5 @@ router.post("/login", async (req, res) => {
         where: {username: username},
     });
 });
-
-
-
 
 module.exports = router;
