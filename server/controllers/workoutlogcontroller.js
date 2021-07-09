@@ -31,6 +31,29 @@ router.post("/create", validateJWT, async (req, res) => {
     }
 });
 
+/*
+==============================
+WORKOUT LOG
+==============================
+*/
+
+router.post("/log/", validateJWT, async (req, res) => {
+    const { description, definition, result } = req.body.workout;
+    const {id} = req.user;
+    const workoutEntry = {
+        description,
+        definition,
+        result,
+        owner_id: id
+    }
+    try {
+        const newWorkout = await WorkoutModel.create(workoutEntry);
+        res.status(200).json(newWorkout);
+    } catch (err) {
+        res.status(500).json ({error: err.message});
+    }
+});
+
 
 /*
 ==============================
