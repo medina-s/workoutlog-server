@@ -9,12 +9,12 @@ const WorkoutCreate = (props) => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        fetch(`http://localhost:3000/workout/log/`, {
+        fetch(`http://localhost:3000/workout/create`, {
             method: 'POST',
-            body: JSON.stringify({log: {description: description, definition: definition, result: result}}),
+            body: JSON.stringify({workout: {description: description, definition: definition, result: result}}),
             headers: new Headers({
                 'Content-type': 'application/json',
-                'Authorization': props.token
+                'Authorization': `Bearer ${props.token}`
             })
         }).then((res)=> res.json())
         .then((logData) => {

@@ -14,7 +14,7 @@ const WorkoutIndex = (props) => {
             method: 'GET',
             headers: new Headers({
                 'Content-Type':'application/json',
-                'Authorization': props.token
+                'Authorization': `Bearer ${props.token}`
             })
         }).then ((res) => res.json())
             .then((logData) => {
@@ -44,7 +44,7 @@ const WorkoutIndex = (props) => {
         <Container>
             <Row>
                 <Col md="3">
-                    WorkoutCreate fetchWorkouts={fetchWorkouts} token={props.token}
+                    <WorkoutCreate fetchWorkouts={fetchWorkouts} token={props.token}/>
                 </Col>
                 <Col md="9">
                     <WorkoutTable workouts={workouts} editUpdateWorkout={editUpdateWorkout} updateOn={updateOn} fetchWorkouts={fetchWorkouts} token={props.token} />
@@ -53,6 +53,6 @@ const WorkoutIndex = (props) => {
             </Row>
         </Container>
     )
-}
+};
 
 export default WorkoutIndex;
